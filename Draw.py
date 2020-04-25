@@ -143,6 +143,7 @@ class EvolutionaryALgorithm:
                         sum+=fit
                         num+=1
                         pairs.append(pair)
+                del chromosome
             if(len(pairs)>6):
                 average=sum/num
                 print(average)
@@ -151,14 +152,20 @@ class EvolutionaryALgorithm:
                 added=0
                 for i in range(10):
                     new_pop.append(pairs[0][0])
-                new_pop[0].save("draw_mama.jpg")
+                new_pop[0].save("draw_papa.jpg")
                 print(EvolutionaryALgorithm.comparePics(target,new_pop[0]))
+
         EvolutionaryALgorithm.gen_num+=1
-        EvolutionaryALgorithm.generate_pop(new_pop)
+        for i in pairs:
+            for j in i:
+                del j
+            del i
+        del pairs
+        return new_pop
 
 
 sys.setrecursionlimit(2147483647)
-target=Image.open("mama512.jpg")
+target=Image.open("papa512.jpg")
 draw=Image.new("RGB",(512,512),"white")
 population=[]
 
@@ -168,5 +175,6 @@ while(len(population)<1):
         buf=EvolutionaryALgorithm.mutation(draw,buf)
         if buf!=None:
             population.append(buf)
-EvolutionaryALgorithm.generate_pop(population)
+while True:
+    population = EvolutionaryALgorithm.generate_pop(population)
 

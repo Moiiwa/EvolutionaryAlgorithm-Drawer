@@ -16,4 +16,4 @@ def resize_image(input_image_path,
     resized_image.show()
     resized_image.save(output_image_path)
 
-resize_image('mama.jpg','mama512.jpg',(512,512))
+resize_image('papa.jpg','papa512.jpg',(512,512))
